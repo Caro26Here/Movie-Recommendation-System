@@ -19,13 +19,13 @@ class movie:
     
     
 
-movie1 = movie('Inception','Science Fiction',8.8,2010)
-print('Movie:',movie1.title)
-print('Genre:',movie1.genre)
+movie1 = movie('Inception', 'Science Fiction', 8.8, 2010)
+print('Movie:', movie1.title)
+print('Genre:', movie1.genre)
 
 # 3. Use a dictionary to store movie information, where the movie title is the key, 
 # and the Movie object is the value.
-new_movie = movie(input('Título de la película: '),input('Genero: '),input('Rating: '),input('Año de estreno: '))
+new_movie = movie(input('Título de la película: '), input('Genero: '), input('Rating: '), input('Año de estreno: '))
 movies_dict = {(new_movie.title): new_movie.genre}
 
 # 4. Implement a function to add movies to the system. The function should take movie 

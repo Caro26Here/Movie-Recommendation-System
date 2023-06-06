@@ -118,7 +118,7 @@ def avg_genre_rating(genre_input, movies_dict):
 avg_genre_rating(genre_input, movies_dict)
 
 # 7. Implement a function to export the movie dictionary to a JSON file.
-def esport_updated_dict():
+def export_updated_dict():
     pass
 
 # 8. Implement a function to import movie information from a JSON file and update the movie 
