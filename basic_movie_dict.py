@@ -23,6 +23,12 @@ def box_office(genre):
 
     return movie
 
+# To check dictionary structure:        
+# movie1 = movie('Inception', 'Science Fiction', 8.8, 2010)
+# print('Movie:', movie1.title)
+# print('Genre:', movie1.genre)
+# print('')
+
 def top_250(genre):
     match genre:
         case 1: # drama
