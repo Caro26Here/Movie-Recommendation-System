@@ -3,7 +3,7 @@ def box_office(genre):
         case 1: # drama
             movie = ['Killers of the Flower Moon', 'Drama', 0, 2023]
         case 2: # comedy
-            movie = ['Barbie', 'Comedy', 0, 2023]
+            movie = ['Barbie', 'Comedy', 6.6, 2023]
         case 3: # action
             movie = ['Fast X', 'Action', 6.3, 2023]
         case 4: # romance
