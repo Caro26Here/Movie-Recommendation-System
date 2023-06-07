@@ -20,14 +20,12 @@ class Movie:
 
 # 8. Implement a function to import movie information from a JSON file and update the movie 
 # dictionary accordingly.
-movies_dict = {}
-def import_dict(movies_dict):
-    with open('movies.json', 'w') as json_file:
-        json.dump(movies_dict, json_file)
-    
+def import_dict():
+    with open('movies.json', 'r') as json_file:
+        movies_dict = json.load(json_file)
+
     return movies_dict
 
-movies_dict = import_dict(movies_dict)
 
 def valid_genre(new_movie):
     genre = new_movie.genre.lower()
@@ -72,11 +70,6 @@ def add_movie(movies_dict):
     movies_dict[new_movie.title] = new_movie
     print('')
 
-count = 0
-movies_dict = {}
-while count < 3:
-    add_movie(movies_dict)
-    count += 1
 
 def movie_recommend(genre_input, movies_dict):
     genre_input = genre_input.lower()
@@ -89,9 +82,6 @@ def movie_recommend(genre_input, movies_dict):
             print('Title: ' + title)
             print('Rating:', movie.rating)
             print('____________________________')
-
-genre_input = input('Desired movie genre: ')
-movie_recommend(genre_input, movies_dict)
 
 # 10. Use the math package to round the average ratings to two decimal places.
 def avg_genre_rating(genre_input, movies_dict):
@@ -106,12 +96,65 @@ def avg_genre_rating(genre_input, movies_dict):
 
     print('Average rating for', genre_input, ':', np.mean(genre_array))
 
-avg_genre_rating(genre_input, movies_dict)
-
 def export_dict(dict):
+    json_dict = dict
     with open('movies.json', 'w') as file:
-      json.dump(dict, file, cls=MovieEncoder)
+      json.dump(json_dict, file, cls=MovieEncoder)
 
-export_dict(movies_dict)
+def menu():
+    print("___________________________________")
+    print("_______________MENU:_______________")
+    print()
+    print("1. Movie recommendation.")
+    print("2. Add a movie to the database.")
+    print("3. Movie genre average rating.")
+    print("___________________________________")
+    print()
+    menu_opt = int(input("Choose an option from the menu above: "))
 
+    return menu_opt
+
+def main():
+    movies_dict = {}
+    movies_dict = import_dict()
+
+    menu_opt = menu()
+
+    match(menu_opt):
+        case 1:
+            print()
+            print("___________________________________")
+            print("OPTION 1. MOVIE RECOMMENDATION")
+            print()
+            genre_input = input('Desired movie genre: ')
+            movie_recommend(genre_input, movies_dict)
+
+        case 2:
+            print()
+            print("___________________________________")
+            print("OPTION 2. ADD A MOVIE TO THE DATABASE")
+            print()
+
+            confirm = str(input("Do you wish to add a movie (y/n)?"))
+            confirm = confirm()
+            confirm_add_movie = confirm == 'y'
+            while confirm_add_movie:
+                add_movie(movies_dict)
+                count += 1    
+
+                export_dict(movies_dict) 
+
+                print("Movie database updated.") 
+                confirm = str(input("Do you wish to add a movie (y/n)?"))
+                confirm_add_movie = confirm == 'y'
+
+        case 3:
+            print()
+            print("___________________________________")    
+            print("OPTION 3. MOVIE GENRE AVERAGE RATING")
+            print()
+            genre_input = input('Desired movie genre: ')
+            avg_genre_rating(genre_input, movies_dict)
+
+main()
 # 9. Write tests for all the implemented functions to ensure their correctness.

@@ -53,3 +53,5 @@ def top_250(genre):
             movie = ['The Lord of the Rings: The Return of the King', 'Adventure', 9.0, 2003]
 
     return movie
+
+{{"The Shawshank Redemption" : ['The Shawshank Redemption', 'drama', 9.3, 1994]}, {"Modern Times" : ['Modern Times', 'comedy', 8.5, 1936]}, {"The Dark Knight" : ['The Dark Knight', 'action', 9.0, 2008]}, {"Before Sunrise" : ['Before Sunrise', 'romance', 8.1, 1995]}, {"Interstelar" : ['Interstelar', 'Science fiction', 8.7, 2014]}, {"The Shining" : ['The shining', 'horror', 8.4, 1980]}, {"Spirited Away" : ['Spirited Away', 'fantasy', 8.6, 2001]}, {"Se7en" : ['Se7en', 'thriller', 8.6, 1995]}, {"The Lion King" : ['The Lion King', 'animation', 8.5, 1994]}, {"The Lord of the Rings: The Return of the King" : ['The Lord of the Rings: The Return of the King', 'adventure', 9.0, 2003]}}
