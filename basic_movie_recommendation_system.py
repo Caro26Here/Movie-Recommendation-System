@@ -25,21 +25,21 @@ def import_dict():
     return movies_dict
 
 def menu():
-    print("___________________________________")
-    print("_______________MENU:_______________")
+    print("_____________________________________")
+    print("________________MENU:________________")
     print()
     print("1. Movie recommendation.")
     print("2. Add a movie to the database.")
     print("3. Movie genre average rating.")
-    print("___________________________________")
+    print("_____________________________________")
     print()
     menu_opt = int(input("Choose an option from the menu above: "))
 
     return menu_opt
 
 def genre_menu():
-    print("___________________________________")
-    print("_________GENRES AVAILABLE:_________")
+    print("_____________________________________")
+    print("__________GENRES AVAILABLE:__________")
     print()
     print(" 1. Drama")
     print(" 2. Comedy")
@@ -51,8 +51,9 @@ def genre_menu():
     print(" 8. Thriller")
     print(" 9. Animation")
     print("10. Adventure")
-    print("___________________________________")
-    
+    print("_____________________________________")
+    print()
+
     genre_opt_num = int(input("Choose an option from the menu above: "))
 
     return genre_opt_num
@@ -100,9 +101,15 @@ def add_movie(movies_dict):
     movies_dict[new_movie.title] = new_movie
     print('')
 
+def valid_opt(opt):
+    is_valid_opt = type(opt) == int
+
+    return is_valid_opt
+
 def movie_recommend(genre_input, movies_dict):
     genre_input = genre_input.lower()
     print('')
+    print("_____________________________________")
     print('RECOMMENDED MOVIE(S):')
 
     for movie_dict2 in movies_dict.values():
@@ -110,11 +117,11 @@ def movie_recommend(genre_input, movies_dict):
             movie_obj = Movie(*movie)
 
             if genre_input == movie_obj.genre:
-                print('____________________________')
+                print("_____________________________________")
                 print('Title: ', movie_obj.title)
                 print('Rating:', movie_obj.rating)
                 print('Year:', movie_obj.year)            
-                print('____________________________')
+                print("_____________________________________")
 
 def avg_genre_rating(genre_input, movies_dict):
     genre_array = []
@@ -176,9 +183,8 @@ def main():
     match(menu_opt):
         case 1:
             print()
-            print("___________________________________")
+            print("_____________________________________")
             print("OPTION 1. MOVIE RECOMMENDATION")
-            print()
             
             genre_input_num = int(genre_menu())
             
@@ -186,11 +192,14 @@ def main():
                 genre_input = int(genre_menu())
 
             genre_input = genre_opt_convert(genre_input_num)
-            movie_recommend(genre_input, movies_dict)
-
+            
+            if valid_opt(genre_input):
+                movie_recommend(genre_input, movies_dict)
+            else:
+                print("Invalid option.")
         case 2:
             print()
-            print("___________________________________")
+            print("_____________________________________")
             print("OPTION 2. ADD A MOVIE TO THE DATABASE")
             print()
 
@@ -212,7 +221,7 @@ def main():
 
         case 3:
             print()
-            print("___________________________________")    
+            print("_____________________________________")    
             print("OPTION 3. MOVIE GENRE AVERAGE RATING")
             print()
           
