@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import math
 
 class MovieEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -10,7 +11,6 @@ class MovieEncoder(json.JSONEncoder):
             return movie_dict
         return super().default(obj)
     
-
 class Movie:
     def __init__(self, title, genre, rating, year):
         self.title = str(title)
@@ -18,14 +18,44 @@ class Movie:
         self.rating = float(rating)
         self.year = int(year)
 
-# 8. Implement a function to import movie information from a JSON file and update the movie 
-# dictionary accordingly.
 def import_dict():
     with open('movies.json', 'r') as json_file:
         movies_dict = json.load(json_file)
 
     return movies_dict
 
+def menu():
+    print("___________________________________")
+    print("_______________MENU:_______________")
+    print()
+    print("1. Movie recommendation.")
+    print("2. Add a movie to the database.")
+    print("3. Movie genre average rating.")
+    print("___________________________________")
+    print()
+    menu_opt = int(input("Choose an option from the menu above: "))
+
+    return menu_opt
+
+def genre_menu():
+    print("___________________________________")
+    print("_________GENRES AVAILABLE:_________")
+    print()
+    print(" 1. Drama")
+    print(" 2. Comedy")
+    print(" 3. Action")
+    print(" 4. Romance")
+    print(" 5. Science Fiction")
+    print(" 6. Horror")
+    print(" 7. Fantasy")
+    print(" 8. Thriller")
+    print(" 9. Animation")
+    print("10. Adventure")
+    print("___________________________________")
+    
+    genre_opt_num = int(input("Choose an option from the menu above: "))
+
+    return genre_opt_num
 
 def valid_genre(new_movie):
     genre = new_movie.genre.lower()
@@ -70,55 +100,78 @@ def add_movie(movies_dict):
     movies_dict[new_movie.title] = new_movie
     print('')
 
-
 def movie_recommend(genre_input, movies_dict):
     genre_input = genre_input.lower()
     print('')
     print('RECOMMENDED MOVIE(S):')
 
-    for title, movie in movies_dict.items():
-        if (genre_input == movie.genre):
-            print('____________________________')
-            print('Title: ' + title)
-            print('Rating:', movie.rating)
-            print('____________________________')
+    for movie_dict2 in movies_dict.values():
+        for movie in movie_dict2.values():
+            movie_obj = Movie(*movie)
 
-# 10. Use the math package to round the average ratings to two decimal places.
+            if genre_input == movie_obj.genre:
+                print('____________________________')
+                print('Title: ', movie_obj.title)
+                print('Rating:', movie_obj.rating)
+                print('Year:', movie_obj.year)            
+                print('____________________________')
+
 def avg_genre_rating(genre_input, movies_dict):
     genre_array = []
     genre_input = genre_input.lower()
 
-    for title in movies_dict:
-        movie = movies_dict[title]
+    for movies_dict2 in movies_dict.values():
+        for movie in movies_dict2.values():
+            movie_obj = Movie(*movie)
 
-        if (genre_input == (movie.genre)):
-            genre_array.append(movie.rating)
+            if (genre_input == (movie_obj.genre)):
+                genre_array.append(movie_obj.rating)
 
-    print('Average rating for', genre_input, ':', np.mean(genre_array))
+    avg_rating = np.mean(genre_array)
+    avg_rating = round(avg_rating, 2)
+
+    print('Average rating for', genre_input, ':', avg_rating)
 
 def export_dict(dict):
     json_dict = dict
     with open('movies.json', 'w') as file:
       json.dump(json_dict, file, cls=MovieEncoder)
 
-def menu():
-    print("___________________________________")
-    print("_______________MENU:_______________")
-    print()
-    print("1. Movie recommendation.")
-    print("2. Add a movie to the database.")
-    print("3. Movie genre average rating.")
-    print("___________________________________")
-    print()
-    menu_opt = int(input("Choose an option from the menu above: "))
+def genre_opt_convert(genre_opt_num):
+    match (genre_opt_num):
+        case 1:
+            genre_opt = "drama"
+        case 2:
+            genre_opt = "comedy"            
+        case 3:
+            genre_opt = "action"
+        case 4:
+            genre_opt = "romance"
+        case 5:
+            genre_opt = "science fiction"
+        case 6:
+            genre_opt = "horror"
+        case 7:
+            genre_opt = "fantasy"
+        case 8:
+            genre_opt = "thriller"
+        case 9:
+            genre_opt = "animation"
+        case 10:
+            genre_opt = "adventure"
 
-    return menu_opt
+    return genre_opt
 
 def main():
     movies_dict = {}
     movies_dict = import_dict()
 
     menu_opt = menu()
+    while ((menu_opt < 1) or (menu_opt > 3)):
+        print("")
+        print("Invalid option entered.")
+        print("Try again...")
+        menu_opt = menu()
 
     match(menu_opt):
         case 1:
@@ -126,7 +179,13 @@ def main():
             print("___________________________________")
             print("OPTION 1. MOVIE RECOMMENDATION")
             print()
-            genre_input = input('Desired movie genre: ')
+            
+            genre_input_num = int(genre_menu())
+            
+            while (genre_input_num < 1) or (genre_input_num > 10):
+                genre_input = int(genre_menu())
+
+            genre_input = genre_opt_convert(genre_input_num)
             movie_recommend(genre_input, movies_dict)
 
         case 2:
@@ -136,24 +195,34 @@ def main():
             print()
 
             confirm = str(input("Do you wish to add a movie (y/n)?"))
-            confirm = confirm()
+            confirm = confirm[:1].lower()
             confirm_add_movie = confirm == 'y'
+
             while confirm_add_movie:
                 add_movie(movies_dict)
-                count += 1    
 
                 export_dict(movies_dict) 
 
                 print("Movie database updated.") 
-                confirm = str(input("Do you wish to add a movie (y/n)?"))
+                confirm = str(input("Do you wish to add a movie (y/n)? "))
                 confirm_add_movie = confirm == 'y'
+
+            if confirm_add_movie == False:
+                print("Exiting Movie System...")         
 
         case 3:
             print()
             print("___________________________________")    
             print("OPTION 3. MOVIE GENRE AVERAGE RATING")
             print()
-            genre_input = input('Desired movie genre: ')
+          
+            genre_input_num = int(genre_menu())
+            
+            while (genre_input_num < 1) or (genre_input_num > 10):
+                genre_input = int(genre_menu())
+
+            genre_input = genre_opt_convert(genre_input_num)
+
             avg_genre_rating(genre_input, movies_dict)
 
 main()
