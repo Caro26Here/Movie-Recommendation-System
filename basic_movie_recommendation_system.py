@@ -1,6 +1,5 @@
 import numpy as np
 import json
-import math
 
 class MovieEncoder(json.JSONEncoder):
     def default(self, obj):
