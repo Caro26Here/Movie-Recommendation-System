@@ -124,8 +124,9 @@ def movie_recommend(genre_input, movies_dict):
     sorted_genre_list = sorted(genre_dict.items(), key=lambda item: item[1].rating, reverse=True)
     sorted_dict = {k: v for k, v in sorted_genre_list}
     
+    cont = 0
     for movie_obj in sorted_dict.values():
-        cont = 0
+        
         if cont < 3:
             print("_____________________________________")
             print('Title: ', movie_obj.title)

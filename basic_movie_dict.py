@@ -1,13 +1,13 @@
 def box_office(genre):
     match genre:
         case 1: # drama
-            movie = ['Killers of the Flower Moon', 'Drama', 0, 2023]
+            movie = ['Killers of the Flower Moon', 'Drama', 9.4, 2023]
         case 2: # comedy
-            movie = ['Barbie', 'Comedy', 6.6, 2023]
+            movie = ['Barbie', 'Comedy', 6.4, 2023]
         case 3: # action
-            movie = ['Fast X', 'Action', 6.3, 2023]
+            movie = ['Fast X', 'Action', 6.2, 2023]
         case 4: # romance
-            movie = ['The Little Mermaid', 'Romance', 7.0, 2023]
+            movie = ['The Little Mermaid', 'Romance', 7.2, 2023]
         case 5: # sci-fy
             movie = ['Ant-Man and the Wasp: Quantumania', 'Sci-fy', 6.2, 2023]
         case 6: # horror
@@ -15,9 +15,9 @@ def box_office(genre):
         case 7: # fantasy
             movie = ['The Super Mario Bros. Movie', 'Fantasy', 7.2, 2023]
         case 8: # thriller
-            movie = ['John Wick: Chapter 4', 'Thriller', 8, 2023]
+            movie = ['John Wick: Chapter 4', 'Thriller', 8.0, 2023]
         case 9: # animation
-            movie = ['Spider-Man: Across the Spider-Verse', 'Animation', 0, 2023]
+            movie = ['Spider-Man: Across the Spider-Verse', 'Animation', 9.0, 2023]
         case 10: # adventure
             movie = ['Guardians of the Galaxy Vol. 3', 'Adventure', 8.2, 2023]
 
