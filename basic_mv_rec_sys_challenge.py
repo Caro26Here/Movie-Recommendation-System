@@ -101,9 +101,12 @@ def add_movie(movies_dict):
     print('')
 
 def valid_opt(opt):
-    is_valid_opt = type(opt) == int
-
-    return is_valid_opt
+    while True:
+        try:
+            if type(opt) == int:
+                return opt
+        except ValueError:
+            print("Invalid Option Entered. Please try again.")
 
 def movie_recommend(genre_input, movies_dict):
     genre_input = genre_input.lower()
@@ -190,12 +193,11 @@ def main():
             while (genre_input_num < 1) or (genre_input_num > 10):
                 genre_input = int(genre_menu())
 
-            genre_input = genre_opt_convert(genre_input_num)
+            valid_opt(genre_input_num)
             
-            if valid_opt(genre_input):
-                movie_recommend(genre_input, movies_dict)
-            else:
-                print("Invalid option.")
+            genre_input = genre_opt_convert(genre_input_num)
+            movie_recommend(genre_input, movies_dict)
+
         case 2:
             print()
             print("_____________________________________")
