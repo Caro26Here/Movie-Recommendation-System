@@ -1,2 +1,3 @@
 # Movie-Recommendation-System-with-Python
-Build a movie recommendation system using Python that suggests movies to users based on their preferences. The system should utilize classes and objects, data structures (dictionaries, tuples, and sets), packages (NumPy, math, JSON), and testing.
+Movie recommendation system that suggests movies to users based on their preferences, currently by genre, ideally by genre matched but by entering a movie name. 
+The system stores the movies given in a JSON file, where the system gets the recommendations from.
